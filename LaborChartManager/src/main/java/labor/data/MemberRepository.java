@@ -1,5 +1,7 @@
 package labor.data;
 
-public class MemberRepository {
+import org.springframework.data.repository.CrudRepository;
+
+public interface MemberRepository {
 
 }

@@ -7,17 +7,24 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 
 import lombok.Data;
 
 
 public class Time {
 	@Id
-	String id;
+	String timeDayString;
 	
-	DayOfWeek dayOfWeek; 	
+	@Transient
+	DayOfWeek dayOfWeek;
+	@Transient
 	LocalTime localTime;
 	
 	@OneToMany
 	private List<LaborSlot> laborSlots;
+	
+	Time(String day, String time) {
+		timeDayString = day.concat(":").concat(time);
+	}
 }

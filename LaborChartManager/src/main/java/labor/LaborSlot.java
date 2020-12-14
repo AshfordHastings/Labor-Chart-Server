@@ -12,11 +12,12 @@ import javax.persistence.Table;
 
 import lombok.Data;
 
+
 @Data
 public class LaborSlot {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private Long id;
+	private String id;
 	
 	private Position position;
 	

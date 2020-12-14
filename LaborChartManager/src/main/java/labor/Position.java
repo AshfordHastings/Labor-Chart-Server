@@ -9,14 +9,17 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import javax.persistence.Transient;
+
 import labor.configs.LaborConfigs;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 
 @Table(name="Position")
+@NoArgsConstructor
 @Data
 @Entity
 public class Position {
