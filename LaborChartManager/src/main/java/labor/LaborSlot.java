@@ -13,8 +13,6 @@ import javax.persistence.Table;
 import lombok.Data;
 
 @Data
-@Entity
-@Table(name="Labor_Chart")
 public class LaborSlot {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)

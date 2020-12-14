@@ -5,6 +5,7 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -19,9 +20,10 @@ import lombok.Data;
 @Data
 @Entity
 public class Position {
+	@Transient
 	@Autowired
 	LaborConfigs laborConfigs;
-	
+
 	public enum LaborDays {
 		WEEKDAYS,
 		WEEKENDS,
@@ -31,18 +33,26 @@ public class Position {
 	
 	@Id
 	private String id;
-	
 	private String name;
-	private LocalTime localTime;
+	
+	@Column(name="STRINGTIME")
+	private String stringTime;
+	
+	@Column(name="LABORDAYS")
+	private String laborDays;
+	
 	private int length;
 	
 	@Transient
+	private LocalTime localTime;
+	@Transient
 	private List<DayOfWeek> daysOfWeek;
 	
-	Position(String id, String name, String localTime, String laborDays, int length) {
+	Position(String id, String name, String stringTime, String laborDays, int length) {
 		this.id = id;
 		this.name = name;
-		String[] hourMinute = localTime.split(":");
+		this.stringTime = stringTime;
+		String[] hourMinute = stringTime.split(":");
 		this.localTime = LocalTime.of(Integer.valueOf(hourMinute[0]), Integer.valueOf(hourMinute[1]));
 		this.daysOfWeek = getLaborDays(LaborDays.valueOf(laborDays));
 		this.length = length;

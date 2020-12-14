@@ -10,7 +10,7 @@ import javax.persistence.OneToMany;
 
 import lombok.Data;
 
-@Entity
+
 public class Time {
 	@Id
 	String id;

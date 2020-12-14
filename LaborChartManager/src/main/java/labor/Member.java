@@ -12,7 +12,7 @@ import lombok.Data;
 
 @Data
 @Validated
-@Entity	
+	
 public class Member {
 	
 	@Id
