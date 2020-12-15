@@ -42,7 +42,7 @@ public class PositionRepoTest {
 		assertThat(optionalPosition.isPresent()).isTrue();
 		Position position = optionalPosition.get();
 		
-		LaborSlot returnSlot = laborSlotRepo.save(new LaborSlot(position));
+		LaborSlot returnSlot = laborSlotRepo.save(new LaborSlot(position, position.getLength(), position.getNumSlots()));
 		assertThat(laborSlotRepo).isNotNull();
 		
 		Optional<LaborSlot> optLaborSlot = laborSlotRepo.findById(returnSlot.getId());

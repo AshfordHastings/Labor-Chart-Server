@@ -7,5 +7,5 @@ import labor.Position;
 
 @Repository
 public interface PositionRepository extends CrudRepository<Position, String> {
-
+	
 }
