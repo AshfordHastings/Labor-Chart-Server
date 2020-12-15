@@ -1,9 +1,10 @@
 package labor.data;
 
 import org.springframework.data.repository.CrudRepository;
-import org.springframework.stereotype.Repository;
+
+import labor.LaborSlot;
 
 
-public interface LaborSlotRepository{
+public interface LaborSlotRepository extends CrudRepository<LaborSlot, Long>{
 
 }
