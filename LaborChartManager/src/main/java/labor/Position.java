@@ -1,23 +1,17 @@
 package labor;
 
 import java.time.DayOfWeek;
-import java.time.LocalTime;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.PrePersist;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
-import labor.configs.LaborConfigs;
 import labor.data.LaborSlotRepository;
+import labor.data.TimeRepository;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -27,14 +21,6 @@ import lombok.NoArgsConstructor;
 @Data
 @Entity
 public class Position {
-	@Transient
-	@Autowired
-	LaborConfigs laborConfigs;
-	
-	@Transient
-	@Autowired
-	LaborSlotRepository laborSlotRepo;
-
 	public enum LaborDays {
 		WEEKDAYS,
 		WEEKENDS,
@@ -55,7 +41,6 @@ public class Position {
 	@Column(name="STRINGTIME")
 	private String stringTime;
 	
-	private LocalTime localTime;
 
 	Position(String id, String name, String stringTime, String laborDays, int length, int numSlots) {
 		this.id = id;
@@ -65,14 +50,18 @@ public class Position {
 		setDaysOfWeek(laborDays);
 		
 		this.stringTime = stringTime;
-		String[] hourMinute = stringTime.split(":");
-		this.localTime = LocalTime.of(Integer.valueOf(hourMinute[0]), Integer.valueOf(hourMinute[1]));
+		//String[] hourMinute = stringTime.split(":");
+		//this.localTime = LocalTime.of(Integer.valueOf(hourMinute[0]), Integer.valueOf(hourMinute[1]));
 
 	}
 
-	public void saveChildren(LaborSlotRepository laborSlotRepo) {
+	public void saveChildren(LaborSlotRepository laborSlotRepo, TimeRepository timeRepo) {
 		for(DayOfWeek day : daysOfWeek) {
-			laborSlotRepo.save(new LaborSlot(this, day, localTime));
+			for(int numSlot = 0; numSlot < numSlots; numSlot++) {
+				LaborSlot newSlot = new LaborSlot(this, day, stringTime, numSlot);
+				newSlot.saveChildren(timeRepo);
+				laborSlotRepo.save(newSlot);
+			}
 		}
 	}
 	
