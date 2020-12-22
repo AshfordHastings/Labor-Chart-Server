@@ -56,5 +56,7 @@ public class PositionRepoTest {
 		assertThat(laborSlot.getPosition()).isEqualTo(position);
 	}
 	
+	@Test 
+	
 	
 }

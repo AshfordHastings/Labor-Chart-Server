@@ -1,7 +1,11 @@
 package labor.data;
 
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
-public interface MemberRepository {
+import labor.Member;
+
+@Repository 
+public interface MemberRepository extends CrudRepository<Member, Long>{
 
 }

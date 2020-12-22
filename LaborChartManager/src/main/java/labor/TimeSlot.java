@@ -1,42 +1,36 @@
 package labor;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.time.DayOfWeek;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;import org.hibernate.annotations.CascadeType;
+import javax.persistence.Embeddable;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+
+import org.hibernate.annotations.Immutable;
 
 import lombok.Data;
 
-@Entity
+@Immutable
+@Embeddable
+@Data
 public class TimeSlot {
-	@Id
-	String timeSlotString;
 	
-	@OneToMany
-	private List<LaborSlot> laborSlots = new ArrayList<LaborSlot>();
-	
+	@Enumerated(EnumType.STRING)
+	private DayOfWeek dayOfWeek;
 	private String timeString;
-	private String dayString;
 	
 	public TimeSlot() {		
 	}
-	public TimeSlot(String dayString, String timeString) {
+	public TimeSlot(DayOfWeek dayString, String timeString) {
 		this.timeString = timeString;
-		this.dayString = dayString;
-		this.timeSlotString = new String(dayString + ":" + timeString);
+		this.dayOfWeek = dayString;
 	}
-
-	public void addLaborSlot(LaborSlot laborSlot) {
-		laborSlots.add(laborSlot);
+	public DayOfWeek getDayOfWeek() {
+		return dayOfWeek;
 	}
-
-	public String getTimeSlotString() {
-		return timeSlotString;
+	public String getTimeString() {
+		return timeString;
 	}
 	
-	public List<LaborSlot> getLaborSlots() {
-		return laborSlots;
-	}
+	
 }

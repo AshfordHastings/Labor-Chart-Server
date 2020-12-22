@@ -4,14 +4,16 @@ import java.time.DayOfWeek;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import labor.data.LaborSlotRepository;
-import labor.data.TimeRepository;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -21,7 +23,7 @@ import lombok.NoArgsConstructor;
 @Data
 @Entity
 public class Position {
-	public enum LaborDays {
+	public static enum LaborDays {
 		WEEKDAYS,
 		WEEKENDS,
 		EVERYDAY,
@@ -33,34 +35,37 @@ public class Position {
 	private String name;
 	private int length;
 	private int numSlots;
+	private String stringTime;
 	
 	@ElementCollection
 	@Column(name = "daysOfWeek")
 	private Set<DayOfWeek> daysOfWeek;
 	
-	@Column(name="STRINGTIME")
-	private String stringTime;
-	
+	@OneToMany(mappedBy = "position",
+				fetch = FetchType.LAZY,
+				cascade = {CascadeType.ALL
+						}
+				)
+	private Set<LaborSlot> laborSlots = new HashSet<>();
 
 	Position(String id, String name, String stringTime, String laborDays, int length, int numSlots) {
 		this.id = id;
 		this.name = name;
 		this.numSlots = numSlots;
 		this.length = length;
-		setDaysOfWeek(laborDays);
-		
 		this.stringTime = stringTime;
-		//String[] hourMinute = stringTime.split(":");
-		//this.localTime = LocalTime.of(Integer.valueOf(hourMinute[0]), Integer.valueOf(hourMinute[1]));
+		setDaysOfWeek(laborDays);
+	
+		mapTimeSlots();
 
 	}
 
-	public void saveChildren(LaborSlotRepository laborSlotRepo, TimeRepository timeRepo) {
+	
+	
+	public void mapTimeSlots() {
 		for(DayOfWeek day : daysOfWeek) {
 			for(int numSlot = 0; numSlot < numSlots; numSlot++) {
-				LaborSlot newSlot = new LaborSlot(this, day, stringTime, numSlot);
-				newSlot.saveChildren(timeRepo);
-				laborSlotRepo.save(newSlot);
+				laborSlots.add(new LaborSlot(this, day, stringTime, numSlot));
 			}
 		}
 	}
