@@ -1,0 +1,12 @@
+{"properties": [
+  {
+    "name": "JDA.token",
+    "type": "java.lang.String",
+    "description": "A description for 'JDA.token'"
+  },
+  {
+    "name": "JDA.testing-channel",
+    "type": "java.lang.String",
+    "description": "A description for 'JDA.testing-channel'"
+  }
+]}
