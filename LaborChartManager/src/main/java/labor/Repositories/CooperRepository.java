@@ -3,9 +3,9 @@ package labor.Repositories;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import labor.Entity.Member;
+import labor.Entity.Cooper;
 
 @Repository 
-public interface MemberRepository extends CrudRepository<Member, Long>{
+public interface CooperRepository extends CrudRepository<Cooper, Long>{
 
 }

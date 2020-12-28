@@ -13,11 +13,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import labor.Entity.LaborSlot;
-import labor.Entity.Member;
+import labor.Entity.Cooper;
 import labor.Entity.Position;
 import labor.Entity.Embedded.TimeSlot;
 import labor.Repositories.LaborSlotRepository;
-import labor.Repositories.MemberRepository;
+import labor.Repositories.CooperRepository;
 import labor.Repositories.PositionRepository;
 
 @DataJpaTest
@@ -30,7 +30,7 @@ public class DBUnitTests {
 	LaborSlotRepository laborSlotRepo;
 	
 	@Autowired
-	MemberRepository memberRepo;
+	CooperRepository memberRepo;
 	
 	
 	// @Test
@@ -104,7 +104,7 @@ public class DBUnitTests {
 		assertThat(testTime.getTimeString()).isEqualTo("9:00");
 		
 		// Creates a new Member object
-		Member testMember = memberRepo.save(new Member("Keoni", "crowley", 9782));
+		Cooper testMember = memberRepo.save(new Cooper("Keoni", "crowley", 9782));
 		assertThat(memberRepo).isNotNull();
 		
 		// Tests findById using LaborSlot
@@ -122,7 +122,7 @@ public class DBUnitTests {
 	@Test
 	public void RepoTest3() {
 		Position testPosition = positionRepo.save(new Position("MG", "Morning Grace", "9:00","EVERYDAY", 1, 1));
-		Member testMember = memberRepo.save(new Member("Keoni", "crowley", 9782));
+		Cooper testMember = memberRepo.save(new Cooper("Keoni", "crowley", 9782));
 		
 		List<LaborSlot> queryReturn= laborSlotRepo.findByTimeSlotAndPosition(new TimeSlot(DayOfWeek.TUESDAY, "9:00"), "MG");
 		LaborSlot morningGraceTuesday = queryReturn.get(0);
@@ -135,7 +135,7 @@ public class DBUnitTests {
 		
 		List<LaborSlot> tuesdayMorningLaborSlots = laborSlotRepo.findByTimeSlot(new TimeSlot(DayOfWeek.TUESDAY, "9:00"));
 		assertThat(tuesdayMorningLaborSlots.size()).isEqualTo(1);
-		Member morningGraceMember = tuesdayMorningLaborSlots.get(0).getMember();
+		Cooper morningGraceMember = tuesdayMorningLaborSlots.get(0).getMember();
 		assertThat(morningGraceMember.getName()).isEqualTo("Keoni");
 		
 		//List<LaborSlot>  = laborSlotRepo.findByTimeSlot(new TimeSlot(DayOfWeek.MONDAY, "9:00"));

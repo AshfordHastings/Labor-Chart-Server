@@ -22,7 +22,7 @@ public class LaborSlot {
 	private String id;
 	
 	@ManyToOne
-	Member member;
+	Cooper cooper;
 	
 	@ManyToOne(optional=false, 
 			fetch = FetchType.LAZY)
@@ -72,12 +72,12 @@ public class LaborSlot {
 		return timeSlot;
 	}
 	
-	public void setMember(Member member) {
-		this.member = member;
+	public void setMember(Cooper cooper) {
+		this.cooper = cooper;
 	}
 	
-	public Member getMember() {
-		return member;
+	public Cooper getMember() {
+		return cooper;
 	}
 
 }
