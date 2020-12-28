@@ -12,5 +12,5 @@ spring:
     show-sql: true
   main:    web-application-type: none
 JDA:
-  token: "NzkxMTIxNzM3MDc2OTY1Mzk5.X-KjiA.EmdXsuLGXT-5L0vnHofchcDCFeM"
+  token: "NzkxMTIxNzM3MDc2OTY1Mzk5.X-KjiA.yhWFQmFzgg2ORLhXUBD0wk2kud8"
   testing-channel: 791402010943553586

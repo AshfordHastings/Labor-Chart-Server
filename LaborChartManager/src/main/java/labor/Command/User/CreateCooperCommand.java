@@ -20,7 +20,7 @@ import net.dv8tion.jda.api.entities.User;
 
 public class CreateCooperCommand implements Command {
 	
-	@CommandInfo(name="create_cooper", expectedArgs=1)
+	@CommandInfo(name="create_cooper")
 	@Override
 	public void execute(Message message, DiscordOutput discordOutput, RepoService repoService) {
 		System.out.println("Preparing to add new member.");
@@ -32,6 +32,8 @@ public class CreateCooperCommand implements Command {
 		
 		StringBuilder returnMessage = new StringBuilder();
 		for(Cooper cooper:cooperList) {
+			
+			
 			repoService.getMemberRepo().save(cooper);
 			returnMessage.append(cooper.getDiscordTag() + ", ");
 		}

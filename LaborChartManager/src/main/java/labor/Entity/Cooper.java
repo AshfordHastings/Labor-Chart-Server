@@ -11,8 +11,12 @@ public class Cooper {
 	@Id
 	private Long id;
 	
-	private String name;
+	private String name = null;
 	private String discordTag;
+	
+	public Cooper(String discordTag) {
+		this.discordTag = discordTag;
+	}
 	
 	public Cooper(String name, String discordTag) {
 		this.name = name;
