@@ -18,8 +18,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.reactive.server.WebTestClient;
 
-import labor.controllers.DBController;
-import labor.data.PositionRepository;
+import labor.Controllers.DBController;
+import labor.Entity.Position;
+import labor.Repositories.PositionRepository;
 
 @WebMvcTest
 @ExtendWith(MockitoExtension.class)

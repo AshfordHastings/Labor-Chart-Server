@@ -12,9 +12,13 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
-import labor.data.LaborSlotRepository;
-import labor.data.MemberRepository;
-import labor.data.PositionRepository;
+import labor.Entity.LaborSlot;
+import labor.Entity.Member;
+import labor.Entity.Position;
+import labor.Entity.Embedded.TimeSlot;
+import labor.Repositories.LaborSlotRepository;
+import labor.Repositories.MemberRepository;
+import labor.Repositories.PositionRepository;
 
 @DataJpaTest
 public class DBUnitTests {
@@ -68,7 +72,7 @@ public class DBUnitTests {
 	}
 	
 	@Test
-	public void PositionRepoTest2() {
+	public void RepoTest2() {
 		// Creates and stores new Position in the database, creates LaborSlot Children
 		Position position =new Position("MG", "Morning Grace", "9:00","EVERYDAY", 1, 1);
 		Position newPosition = positionRepo.save(position);

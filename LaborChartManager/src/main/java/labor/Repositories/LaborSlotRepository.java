@@ -1,4 +1,4 @@
-package labor.data;
+package labor.Repositories;
 
 import java.util.List;
 
@@ -6,8 +6,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
-import labor.LaborSlot;
-import labor.TimeSlot;
+import labor.Entity.LaborSlot;
+import labor.Entity.Embedded.TimeSlot;
 
 
 public interface LaborSlotRepository extends CrudRepository<LaborSlot, String>{

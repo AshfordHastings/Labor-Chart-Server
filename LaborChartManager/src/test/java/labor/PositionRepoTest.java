@@ -13,6 +13,8 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import labor.Entity.LaborSlot;
+import labor.Entity.Position;
 import labor.data.LaborSlotRepository;
 import labor.data.PositionRepository;
 

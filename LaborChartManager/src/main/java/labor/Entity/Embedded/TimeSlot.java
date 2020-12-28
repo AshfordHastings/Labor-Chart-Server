@@ -1,4 +1,4 @@
-package labor;
+package labor.Entity.Embedded;
 
 import java.time.DayOfWeek;
 

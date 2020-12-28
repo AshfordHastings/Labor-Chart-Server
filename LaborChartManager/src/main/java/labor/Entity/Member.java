@@ -1,4 +1,4 @@
-package labor;
+package labor.Entity;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

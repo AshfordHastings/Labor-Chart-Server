@@ -1,4 +1,4 @@
-package labor;
+package labor.Entity;
 
 import java.time.DayOfWeek;
 
@@ -11,6 +11,8 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.NotFound;
 import org.hibernate.annotations.NotFoundAction;
+
+import labor.Entity.Embedded.TimeSlot;
 
 @Entity
 @Table(name="labor_chart")

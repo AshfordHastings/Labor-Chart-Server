@@ -1,4 +1,4 @@
-package labor;
+package labor.Entity;
 
 import java.time.DayOfWeek;
 import java.util.HashSet;
@@ -13,14 +13,13 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import labor.data.LaborSlotRepository;
+import org.springframework.stereotype.Component;
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
+@Component
 @Table
-@NoArgsConstructor
-@Data
 @Entity
 public class Position {
 	public static enum LaborDays {
@@ -36,6 +35,7 @@ public class Position {
 	private int length;
 	private int numSlots;
 	private String stringTime;
+	private String laborDays;
 	
 	@ElementCollection
 	@Column(name = "daysOfWeek")
@@ -48,19 +48,21 @@ public class Position {
 				)
 	private Set<LaborSlot> laborSlots = new HashSet<>();
 
-	Position(String id, String name, String stringTime, String laborDays, int length, int numSlots) {
+	public Position(String id, String name, String stringTime, String laborDays, int length, int numSlots) {
 		this.id = id;
 		this.name = name;
 		this.numSlots = numSlots;
 		this.length = length;
 		this.stringTime = stringTime;
-		setDaysOfWeek(laborDays);
+		this.laborDays = laborDays;
+		setDaysOfWeek(laborDays.toUpperCase());
 	
 		mapTimeSlots();
 
 	}
 
-	
+	Position() {
+	}
 	
 	public void mapTimeSlots() {
 		for(DayOfWeek day : daysOfWeek) {
@@ -92,4 +94,23 @@ public class Position {
 		}
 	
 	}
+	
+	public String getId() {
+		return id;
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder positionString = new StringBuilder();
+		positionString.append("Position: " + '\n' +
+								'\t' + "Id: " + id + '\n' +
+								'\t' + "Name: " + name + '\n' +
+								'\t' + "Time: " + stringTime + '\n' +
+								'\t' + "Frequency: " + laborDays + '\n' +
+								'\t' + "Length: " + length + " hours" + '\n' +
+								'\t' + "Number of Slots: " + numSlots + '\n');
+		return positionString.toString();
+	}
+	
+	
 }

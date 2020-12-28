@@ -1,9 +1,9 @@
-package labor.data;
+package labor.Repositories;
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import labor.Member;
+import labor.Entity.Member;
 
 @Repository 
 public interface MemberRepository extends CrudRepository<Member, Long>{
