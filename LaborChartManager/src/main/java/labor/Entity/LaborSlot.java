@@ -55,6 +55,10 @@ public class LaborSlot {
 		return myId;
 	}
 	
+	public void clearCooper() {
+		this.cooper = null;
+	}
+	
 	@Override
 	public String toString() {
 		return new String(this.id);
@@ -83,5 +87,7 @@ public class LaborSlot {
 	public DayOfWeek getDayOfWeek() {
 		return timeSlot.getDayOfWeek();
 	}
+	
+	
 
 }

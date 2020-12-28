@@ -5,21 +5,23 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import net.dv8tion.jda.api.entities.Member;
+
 @Entity
 public class Cooper {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Id
 	private Long id;
 	
-	private String name = null;
+	private String username;
 	private String discordTag;
 	
-	public Cooper(String discordTag) {
-		this.discordTag = discordTag;
+	public Cooper(Member member) {
+		this.username = member.getUser().getAsTag();
+		this.discordTag = member.getAsMention();
 	}
-	
-	public Cooper(String name, String discordTag) {
-		this.name = name;
+	public Cooper(String username, String discordTag) {
+		this.username = username;
 		this.discordTag = discordTag;
 	}
 	
@@ -36,11 +38,7 @@ public class Cooper {
 	}
 
 	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
+		return username;
 	}
 
 	public String getDiscordTag() {

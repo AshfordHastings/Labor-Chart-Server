@@ -8,8 +8,7 @@ import java.util.stream.Stream;
 import labor.Command.Command;
 import labor.Command.CommandInfo;
 import labor.Entity.Position;
-import labor.Repositories.PositionRepository;
-import labor.Service.RepoService;
+import labor.Service.LaborService;
 import labor.Util.DiscordOutput;
 import net.dv8tion.jda.api.entities.Message;
 
@@ -17,7 +16,7 @@ public class CreateEntityCommand implements Command {
 	
 	@CommandInfo(name="create_position", expectedArgs=6)
 	@Override
-	public void execute(Message message, DiscordOutput discordOutput, RepoService repoService) {
+	public void execute(Message message, DiscordOutput discordOutput, LaborService laborService) {
 		// TODO Auto-generated method stub
 		List<String> messageParsed = Stream.of(message.getContentDisplay().split(" "))
 				.map(str -> new String(str))
@@ -31,9 +30,9 @@ public class CreateEntityCommand implements Command {
 		String numSlots = messageParsed.get(6);
 		
 		Position newPosition = new Position(id, name, time, labordays, Integer.valueOf(length), Integer.valueOf(numSlots));
-		repoService.getPositionRepo().save(newPosition);
+		laborService.getRepoService().getPositionRepo().save(newPosition);
 		
-		Optional<Position> optPosition = repoService.getPositionRepo().findById(id);
+		Optional<Position> optPosition = laborService.getRepoService().getPositionRepo().findById(id);
 		Position position = optPosition.get();
 		
 		String returnMessage = new String();

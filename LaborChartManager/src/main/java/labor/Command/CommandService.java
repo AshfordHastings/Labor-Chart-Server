@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import labor.Service.JDAService;
+import labor.Service.LaborService;
 import labor.Service.RepoService;
 import labor.Util.DiscordOutput;
 import net.dv8tion.jda.api.entities.Message;
@@ -19,13 +20,9 @@ import net.dv8tion.jda.api.hooks.SubscribeEvent;
 
 @Service
 public class CommandService {
+
 	@Autowired
-	JDAService jdaService;
-	
-	@Autowired
-	RepoService repoService;
-	
-	
+	LaborService laborService;
 	
 	public void addEventListeners(Command... commands) {
 		addEventListeners(Arrays.asList(commands));
@@ -46,7 +43,7 @@ public class CommandService {
 				
 				System.out.println("Preparing to add command : " + info.name());
 				
-				this.jdaService.getJDA().addEventListener(new AnnotatedEventManager() {
+				this.laborService.getJdaService().getJDA().addEventListener(new AnnotatedEventManager() {
 					@SubscribeEvent
 					public void registerCommand(MessageReceivedEvent event) {
 						Message message = event.getMessage();
@@ -71,7 +68,7 @@ public class CommandService {
 							return;
 						}
 						
-						command.execute(message, responseOutput, repoService);
+						command.execute(message, responseOutput, laborService);
 					}
 				});
 				System.out.println("New command added: " + info.name());
