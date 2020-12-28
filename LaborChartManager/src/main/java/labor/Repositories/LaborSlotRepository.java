@@ -1,5 +1,6 @@
 package labor.Repositories;
 
+import java.time.DayOfWeek;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.Query;
@@ -13,6 +14,7 @@ import labor.Entity.Embedded.TimeSlot;
 public interface LaborSlotRepository extends CrudRepository<LaborSlot, String>{
 	List<LaborSlot> findByTimeSlot(TimeSlot timeSlot);
 	
-	@Query("from LaborSlot laborSlot where laborSlot.timeSlot=:timeSlot and laborSlot.position.id=:positionId")
-	List<LaborSlot> findByTimeSlotAndPosition(@Param("timeSlot") TimeSlot timeSlot, @Param("positionId") String positionId);
+	@Query("from LaborSlot laborSlot where laborSlot.timeSlot.dayOfWeek=:dayOfWeek and (laborSlot.position.id=:position OR laborSlot.position.name=:position)")
+	List<LaborSlot> findByDayOfWeekAndPosition(@Param("dayOfWeek") DayOfWeek dayOfWeek, @Param("position") String position);
+
 }

@@ -9,5 +9,5 @@ import java.lang.annotation.Target;
 @Target(ElementType.METHOD)
 public @interface CommandInfo {
 	public String name();
-	int expectedArgs();
+	int expectedArgs() default -1;
 }

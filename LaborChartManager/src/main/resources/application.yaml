@@ -11,4 +11,6 @@ spring:
     generate-ddl: true
     show-sql: true
   main:    web-application-type: none
-
+JDA:
+  token: "NzkxMTIxNzM3MDc2OTY1Mzk5.X-KjiA.EmdXsuLGXT-5L0vnHofchcDCFeM"
+  testing-channel: 791402010943553586

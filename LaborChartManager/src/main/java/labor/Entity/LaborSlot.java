@@ -72,12 +72,16 @@ public class LaborSlot {
 		return timeSlot;
 	}
 	
-	public void setMember(Cooper cooper) {
+	public void setCooper(Cooper cooper) {
 		this.cooper = cooper;
 	}
 	
 	public Cooper getMember() {
 		return cooper;
+	}
+	
+	public DayOfWeek getDayOfWeek() {
+		return timeSlot.getDayOfWeek();
 	}
 
 }

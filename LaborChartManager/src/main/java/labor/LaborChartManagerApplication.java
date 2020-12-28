@@ -7,6 +7,7 @@ import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
 
 import labor.Command.CommandService;
+import labor.Command.User.AddLaborersCommand;
 import labor.Command.User.CreateCooperCommand;
 import labor.Command.User.CreateEntityCommand;
 import labor.Service.JDAService;
@@ -29,7 +30,8 @@ public class LaborChartManagerApplication {
 		jdaService.startBot();
 		commandService.addEventListeners(
 				new CreateEntityCommand(),
-				new CreateCooperCommand());
+				new CreateCooperCommand(),
+				new AddLaborersCommand());
 		
 		DiscordOutput defaultOutput = jdaService.getDefaultOutput();
 		//defaultOutput.sendMessage("Bot is connected!");

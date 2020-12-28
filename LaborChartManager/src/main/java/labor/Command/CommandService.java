@@ -66,7 +66,7 @@ public class CommandService {
 						
 						
 						DiscordOutput responseOutput = new DiscordOutput(event.getChannel());
-						if(messageParsed.size() - 1 != info.expectedArgs()) {
+						if(info.expectedArgs() != -1 && info.expectedArgs() != messageParsed.size() - 1) {
 							responseOutput.sendMessage("Unexpected arguement count! Expected argument count is:" + info.expectedArgs() + ".");
 							return;
 						}

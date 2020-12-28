@@ -18,6 +18,10 @@ public class Cooper {
 		this.name = name;
 		this.discordTag = discordTag;
 	}
+	
+	Cooper() {
+		
+	}
 
 	public Long getId() {
 		return id;
