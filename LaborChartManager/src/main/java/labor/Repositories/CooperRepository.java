@@ -10,4 +10,5 @@ import labor.Entity.Cooper;
 @Repository 
 public interface CooperRepository extends CrudRepository<Cooper, Long>{
 	List<Cooper> findByDiscordTag(String discordTag);
+	List<Cooper> findByUsername(String username);
 }

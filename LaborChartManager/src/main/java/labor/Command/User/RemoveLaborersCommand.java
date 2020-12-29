@@ -64,7 +64,7 @@ public class RemoveLaborersCommand implements Command {
 		returnString.append("Database was successfully updated! \nHere are the current coopers for the position" + positionString + " on " + dayOfWeek.toString() + ":");
 		for(LaborSlot dbSlotFromQuery : dbSlotsFromQuery) {
 			if(dbSlotFromQuery.getMember() != null) {
-				returnString.append('\n' + laborService.getJdaService().getJDA().getUserByTag(dbSlotFromQuery.getMember().getName()).getAsMention());
+				returnString.append('\n' + dbSlotFromQuery.getMember().getDiscordTag());
 			}
 		}
 		discordOutput.sendMessage(returnString.toString());

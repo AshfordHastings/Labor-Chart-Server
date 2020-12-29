@@ -10,6 +10,7 @@ import labor.Command.CommandService;
 import labor.Command.User.AddLaborersCommand;
 import labor.Command.User.CreateCooperCommand;
 import labor.Command.User.CreateEntityCommand;
+import labor.Command.User.GetCooperCommand;
 import labor.Command.User.RemoveLaborersCommand;
 import labor.Service.JDAService;
 import labor.Util.DiscordOutput;
@@ -33,7 +34,8 @@ public class LaborChartManagerApplication {
 				new CreateEntityCommand(),
 				new CreateCooperCommand(),
 				new AddLaborersCommand(),
-				new RemoveLaborersCommand());
+				new RemoveLaborersCommand(),
+				new GetCooperCommand());
 		
 		DiscordOutput defaultOutput = jdaService.getDefaultOutput();
 		//defaultOutput.sendMessage("Bot is connected!");
