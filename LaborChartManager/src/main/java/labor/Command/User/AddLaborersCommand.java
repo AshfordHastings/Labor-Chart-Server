@@ -45,7 +45,7 @@ public class AddLaborersCommand implements Command {
 		
 		List<LaborSlot> dbSlotsFromQuery = laborService.getRepoService().getLaborSlotRepo().findByDayOfWeekAndPosition(dayOfWeek, positionString);
 		
-		if(!(dbSlotsFromQuery.size() > memberList.size())) {
+		if(!(dbSlotsFromQuery.size() >= memberList.size())) {
 			StringBuilder returnString = new StringBuilder();
 			returnString.append("You put too many laborers! You must be dumb!\n");
 			returnString.append("Number of laborers working at " + dayOfWeek.toString() + " " + positionString + ": " + dbSlotsFromQuery.size());
@@ -57,7 +57,7 @@ public class AddLaborersCommand implements Command {
 				.filter(slot -> slot.getMember() == null)
 				.collect(Collectors.toList());
 		
-		if(!(emptyLaborSlots.size() > memberList.size())) {
+		if(!(emptyLaborSlots.size() >= memberList.size())) {
 			StringBuilder returnString = new StringBuilder();
 			returnString.append("Whoops! You've gotta delete some laborers first before you add these new ones! \n");
 			returnString.append("Here are the current laborers working: \n");

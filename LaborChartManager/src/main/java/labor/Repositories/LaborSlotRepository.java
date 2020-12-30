@@ -21,6 +21,9 @@ public interface LaborSlotRepository extends CrudRepository<LaborSlot, String>{
 	@Query("from LaborSlot laborSlot where laborSlot.timeSlot.dayOfWeek=:dayOfWeek and (laborSlot.position.id=:position OR laborSlot.position.name=:position) and laborSlot.cooper.username=:discordName")
 	List<LaborSlot> findByDayOfWeekAndPositionAndDiscordTag(@Param("dayOfWeek") DayOfWeek dayOfWeek, @Param("position") String position, @Param("discordName")String discordName);
 
+	@Query("from LaborSlot laborSlot where laborSlot.timeSlot.dayOfWeek=:dayOfWeek and laborSlot.timeSlot.timeString=:timeString")
+	List<LaborSlot> findByDayOfWeekAndTime(@Param("dayOfWeek") DayOfWeek dayOfWeek, @Param("timeString") String time);
+	
 	List<LaborSlot> findByCooper(Cooper cooper);
 
 }

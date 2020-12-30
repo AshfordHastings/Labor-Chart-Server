@@ -112,5 +112,8 @@ public class Position {
 		return positionString.toString();
 	}
 	
+	public String getName() {
+		return name;
+	}
 	
 }
