@@ -29,7 +29,7 @@ public class CreateEntityCommand implements Command {
 		String length = messageParsed.get(5);
 		String numSlots = messageParsed.get(6);
 		
-		Position newPosition = new Position(id, name, time, labordays, Integer.valueOf(length), Integer.valueOf(numSlots));
+		Position newPosition = new Position(id, name, time, labordays, Integer.valueOf(length), Integer.valueOf(numSlots), laborService);
 		laborService.getRepoService().getPositionRepo().save(newPosition);
 		
 		Optional<Position> optPosition = laborService.getRepoService().getPositionRepo().findById(id);

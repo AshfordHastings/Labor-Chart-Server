@@ -16,6 +16,9 @@ public class LaborService {
 	
 	@Autowired
 	CommandService commandService;
+	
+	@Autowired
+	NotifierService notifierService;
 
 	public JDAService getJdaService() {
 		return jdaService;
@@ -27,6 +30,10 @@ public class LaborService {
 
 	public CommandService getCommandService() {
 		return commandService;
+	}
+	
+	public NotifierService getNotifierService() {
+		return notifierService;
 	}
 	
 	

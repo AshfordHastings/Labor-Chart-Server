@@ -1,5 +1,7 @@
 package labor;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -15,6 +17,7 @@ import labor.Command.User.GetLaborTimeCommand;
 import labor.Command.User.RemoveLaborersCommand;
 import labor.Service.JDAService;
 import labor.Util.DiscordOutput;
+import net.dv8tion.jda.api.entities.Guild;
 
 @SpringBootApplication
 public class LaborChartManagerApplication {
@@ -31,15 +34,5 @@ public class LaborChartManagerApplication {
 	@EventListener(ApplicationReadyEvent.class)
 	public void afterStartup() {
 		jdaService.startBot();
-		commandService.addEventListeners(
-				new CreateEntityCommand(),
-				new CreateCooperCommand(),
-				new AddLaborersCommand(),
-				new RemoveLaborersCommand(),
-				new GetCooperCommand(),
-				new GetLaborTimeCommand());
-		
-		DiscordOutput defaultOutput = jdaService.getDefaultOutput();
-		//defaultOutput.sendMessage("Bot is connected!");
 	}
 }

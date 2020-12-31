@@ -1,6 +1,7 @@
 package labor.Entity;
 
 import java.time.DayOfWeek;
+import java.time.LocalTime;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -15,6 +16,7 @@ import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
 
+import labor.Service.LaborService;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -48,7 +50,7 @@ public class Position {
 				)
 	private Set<LaborSlot> laborSlots = new HashSet<>();
 
-	public Position(String id, String name, String stringTime, String laborDays, int length, int numSlots) {
+	public Position(String id, String name, String stringTime, String laborDays, int length, int numSlots, LaborService laborService) {
 		this.id = id;
 		this.name = name;
 		this.numSlots = numSlots;
@@ -57,17 +59,18 @@ public class Position {
 		this.laborDays = laborDays;
 		setDaysOfWeek(laborDays.toUpperCase());
 	
-		mapTimeSlots();
+		mapTimeSlots(laborService);
 
 	}
 
 	Position() {
 	}
 	
-	public void mapTimeSlots() {
+	public void mapTimeSlots(LaborService laborService) {
 		for(DayOfWeek day : daysOfWeek) {
 			for(int numSlot = 0; numSlot < numSlots; numSlot++) {
 				laborSlots.add(new LaborSlot(this, day, stringTime, numSlot));
+				laborService.getNotifierService().setNotifyTime(day, LocalTime.parse(stringTime));
 			}
 		}
 	}
