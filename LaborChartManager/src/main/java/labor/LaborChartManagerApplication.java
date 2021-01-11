@@ -1,38 +1,26 @@
 package labor;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
 
-import labor.Command.CommandService;
-import labor.Command.User.AddLaborersCommand;
-import labor.Command.User.CreateCooperCommand;
-import labor.Command.User.CreateEntityCommand;
-import labor.Command.User.GetCooperCommand;
-import labor.Command.User.GetLaborTimeCommand;
-import labor.Command.User.RemoveLaborersCommand;
-import labor.Service.JDAService;
-import labor.Util.DiscordOutput;
-import net.dv8tion.jda.api.entities.Guild;
+import labor.Service.LaborService;
 
 @SpringBootApplication
 public class LaborChartManagerApplication {
 	@Autowired
-	JDAService jdaService;
-	@Autowired
-	CommandService commandService;
+	LaborService laborService;
 	
 
 	public static void main(String[] args) {
 		SpringApplication.run(LaborChartManagerApplication.class, args);
 	}
 	
+	// Starts bot after registering class
 	@EventListener(ApplicationReadyEvent.class)
 	public void afterStartup() {
-		jdaService.startBot();
+		laborService.getJdaService().startBot();
 	}
 }

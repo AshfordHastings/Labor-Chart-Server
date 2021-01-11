@@ -31,9 +31,6 @@ import net.dv8tion.jda.api.hooks.AnnotatedEventManager;
 @PropertySource("classpath:application.yaml")
 public class JDAService {
 	@Autowired
-	CommandService commandService;
-	
-	@Autowired
 	LaborService laborService;
 	
 	@Value("${JDA.token}")
@@ -45,6 +42,7 @@ public class JDAService {
 	JDA jda;
 	DiscordOutput defaultOutput;
 	
+	// Builds JDA instance with an AnnotatedEventManager - methods annotated with @SubscribeEvent called
 	public void startBot() {
 		try {
 			System.out.println("About to create bot with token: " + token);
@@ -53,6 +51,7 @@ public class JDAService {
 				.build();
 			System.out.println("Bot has been connected");
 			
+			//Waits for StartBotCommand to be called before registering other commands
 			addCommands(new StartBotCommand());
 			
 		} catch (LoginException e) {
@@ -61,8 +60,9 @@ public class JDAService {
 		}
 	}
 	
+	//Called by StartBotCommand to register other commands 
 	public void activateLaborCommands() {
-		commandService.addEventListeners(
+		addCommands(
 				new CreateEntityCommand(),
 				new CreateCooperCommand(),
 				new AddLaborersCommand(),
@@ -74,7 +74,7 @@ public class JDAService {
 	
 	public void addCommands(Command... commands) {
 		List<Command> commandList = Arrays.asList(commands);
-		commandService.addEventListeners(commandList);
+		laborService.getCommandService().addEventListeners(commandList);
 	}
 	
 
@@ -90,10 +90,6 @@ public class JDAService {
 	
 	public DiscordOutput getDefaultOutput() {
 		return defaultOutput;
-	}
-	
-	public CommandService getCommandRegistry() {
-		return commandService;
 	}
 	
 }
