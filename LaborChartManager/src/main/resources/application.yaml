@@ -13,7 +13,4 @@ spring:
     password: hailsatandavetuckerhttpL
   jpa:
     generate-ddl: true
-    show-sql: true
-JDA:
-  token: "NzkxMTIxNzM3MDc2OTY1Mzk5.X-KjiA.qTfeGQYYdaWFUVXZULtMYX5vtrQ"
-  testing-channel: 791402010943553586
+    show-sql: true
