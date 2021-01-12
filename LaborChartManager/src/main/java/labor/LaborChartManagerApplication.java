@@ -13,4 +13,9 @@ public class LaborChartManagerApplication {
 		SpringApplication.run(LaborChartManagerApplication.class, args);
 	}
 	
+	// Starts bot after registering class
+	@EventListener(ApplicationReadyEvent.class)
+	public void afterStartup() {
+		System.out.println("Butt");
+	}
 }
