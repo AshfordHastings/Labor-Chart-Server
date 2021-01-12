@@ -1,16 +1,19 @@
-
+server:
+  port: 8090
 spring:
+  data:    rest:
+      base-path: /api
+
   h2:
     console:      enabled: true
   datasource:
     url:  jdbc:h2:mem:testDB;DB_CLOSE_ON_EXIT=FALSE
     driverClassName: org.h2.Driver
     username: labormaster
-    password: hailsatandavetucker
+    password: hailsatandavetuckerhttpL
   jpa:
     generate-ddl: true
     show-sql: true
-  main:    web-application-type: none
 JDA:
-  token: "NzkxMTIxNzM3MDc2OTY1Mzk5.X-KjiA.yhWFQmFzgg2ORLhXUBD0wk2kud8"
+  token: "NzkxMTIxNzM3MDc2OTY1Mzk5.X-KjiA.qTfeGQYYdaWFUVXZULtMYX5vtrQ"
   testing-channel: 791402010943553586

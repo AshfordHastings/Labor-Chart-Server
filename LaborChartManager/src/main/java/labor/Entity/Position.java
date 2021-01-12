@@ -57,9 +57,13 @@ public class Position {
 		this.stringTime = stringTime;
 		this.laborDays = laborDays;
 		setDaysOfWeek(laborDays.toUpperCase());
-	
 		mapTimeSlots();
 
+	}
+	
+	// creates a new Position Entity that properly populates the DaysOfWeek and creates laborSlots in the constructor
+	static public Position createPositionFrom(Position position) {
+		return new Position(position.getId(), position.getName(), position.getStringTime(), position.getLaborDays(), position.getLength(), position.getNumSlots());
 	}
 
 	Position() {
@@ -119,5 +123,22 @@ public class Position {
 	public String getName() {
 		return name;
 	}
+	
+	public String getStringTime() {
+		return stringTime;
+	}
+
+	public int getLength() {
+		return length;
+	}
+
+	public int getNumSlots() {
+		return numSlots;
+	}
+
+	public String getLaborDays() {
+		return laborDays;
+	}
+	
 	
 }
