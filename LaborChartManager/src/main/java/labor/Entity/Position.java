@@ -37,10 +37,11 @@ public class Position {
 	private int numSlots;
 	private String stringTime;
 	private String laborDays;
+	private String apple;
 	
 	@ElementCollection
 	@Column(name = "daysOfWeek")
-	private Set<DayOfWeek> daysOfWeek;
+	private Set<DayOfWeek> daysOfWeek = new HashSet<DayOfWeek>();
 	
 	@OneToMany(mappedBy = "position",
 				fetch = FetchType.LAZY,

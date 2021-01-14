@@ -14,21 +14,19 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import labor.Entity.Cooper;
-import labor.Entity.Position;
 import labor.Service.RepoService;
 
-@RequestMapping(path="/api/positions")
+@RequestMapping(path="api/coopers")
 @RestController
-public class PositionController {
-
+public class CooperController {
+	
 	@Autowired
 	RepoService repoService;
 	
-	@GetMapping(path="/coopers/search/findByUsername")
-	@ResponseStatus(HttpStatus.OK)
-	public List<Cooper> findByUsername(
-			@RequestParam(value="username", required=false) String username,
-			@RequestParam(value="discordTag", required=false) String discordTag){
+	@GetMapping(path="/search")
+	public List<Cooper> findCoopers(
+			@RequestParam(value="username", required=false, defaultValue="") String username,
+			@RequestParam(value="discordTag", required=false, defaultValue="") String discordTag){
 		if(username.isEmpty() && discordTag.isEmpty()) {
 		    List<Cooper> result = new ArrayList<Cooper>();
 		    repoService.getMemberRepo().findAll().forEach(result::add);
@@ -42,12 +40,10 @@ public class PositionController {
 		}
 	}
 	
-	// Custom post method created to access the Position constructor - which populates LaborSlot entities in the database
-	@PostMapping(path="/positions")
+	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public Position savePosition(@RequestBody Position position) {
-		Position positionEntity = Position.createPositionFrom(position);
-		Position returnPosition = repoService.getPositionRepo().save(positionEntity);
-		return returnPosition;
+	public Cooper postCooper(@RequestBody Cooper cooper) {
+		System.out.println("Server has received: " + cooper);
+		return repoService.getMemberRepo().save(cooper);
 	}
 }

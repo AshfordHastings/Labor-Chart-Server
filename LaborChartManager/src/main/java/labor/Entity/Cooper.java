@@ -37,7 +37,7 @@ public class Cooper {
 		this.id = id;
 	}
 
-	public String getName() {
+	public String getUsername() {
 		return username;
 	}
 
@@ -48,7 +48,12 @@ public class Cooper {
 	public void setDiscordUsername(String discordTag) {
 		this.discordTag = discordTag;
 	}
+	@Override
+	public String toString() {
+		return "Cooper [id=" + id + ", username=" + username + ", discordTag=" + discordTag + "]";
+	}
 
+	
 	
 	
 }
