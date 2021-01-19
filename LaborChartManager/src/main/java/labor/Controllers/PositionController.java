@@ -1,10 +1,13 @@
 package labor.Controllers;
 
-import java.util.ArrayList;
+import java.time.DayOfWeek;
 import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -13,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import labor.Entity.Cooper;
+import labor.Entity.LaborSlot;
 import labor.Entity.Position;
 import labor.Service.RepoService;
 
@@ -24,21 +27,23 @@ public class PositionController {
 	@Autowired
 	RepoService repoService;
 	
-	@GetMapping(path="/coopers/search/findByUsername")
+	@GetMapping(path="/search", params = {"dayOfWeek", "time"})
+	public List<LaborSlot> findLaborSlots(
+			@RequestParam(value="dayOfWeek") DayOfWeek dayOfWeek,
+			@RequestParam(value="time") String time){
+		
+		return repoService.getLaborSlotRepo().findByDayOfWeekAndTime(dayOfWeek, time);
+	}
+	
+	@GetMapping(path="/search", params = {"id"})
 	@ResponseStatus(HttpStatus.OK)
-	public List<Cooper> findByUsername(
-			@RequestParam(value="username", required=false) String username,
-			@RequestParam(value="discordTag", required=false) String discordTag){
-		if(username.isEmpty() && discordTag.isEmpty()) {
-		    List<Cooper> result = new ArrayList<Cooper>();
-		    repoService.getMemberRepo().findAll().forEach(result::add);
-			return result;
-		} else if(username.isEmpty()) {
-			return repoService.getMemberRepo().findByDiscordTag(discordTag);
-		} else if(discordTag.isEmpty()) {
-			return repoService.getMemberRepo().findByUsername(username);
-		} else {
-			return repoService.getMemberRepo().findByUsername(username);
+	public ResponseEntity<Position> findPositionById(
+			@RequestParam(value="id") String id) {
+		try {
+			Optional<Position> positionQuery = repoService.getPositionRepo().findById(id);
+			return new ResponseEntity<>(positionQuery.orElseThrow(), HttpStatus.OK);
+		} catch(NoSuchElementException e) {
+			return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
 		}
 	}
 	

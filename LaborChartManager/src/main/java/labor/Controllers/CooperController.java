@@ -24,6 +24,7 @@ public class CooperController {
 	RepoService repoService;
 	
 	@GetMapping(path="/search")
+	@ResponseStatus(HttpStatus.OK)
 	public List<Cooper> findCoopers(
 			@RequestParam(value="username", required=false, defaultValue="") String username,
 			@RequestParam(value="discordTag", required=false, defaultValue="") String discordTag){

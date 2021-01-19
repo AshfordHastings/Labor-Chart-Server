@@ -12,7 +12,6 @@ public class Cooper {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Id
 	private Long id;
-	
 	private String username;
 	private String discordTag;
 	

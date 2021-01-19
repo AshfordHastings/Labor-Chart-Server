@@ -12,6 +12,8 @@ import javax.persistence.Table;
 import org.hibernate.annotations.NotFound;
 import org.hibernate.annotations.NotFoundAction;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import labor.Entity.Embedded.TimeSlot;
 
 @Entity
@@ -21,6 +23,7 @@ public class LaborSlot {
 	@Id
 	private String id;
 	
+	@JsonProperty("cooper")
 	@ManyToOne
 	Cooper cooper;
 	
@@ -29,6 +32,7 @@ public class LaborSlot {
 	@JoinColumn(name = "position_id")
 	@NotFound(action=NotFoundAction.IGNORE)
 	private Position position;
+	@JsonProperty("timeSlot")
 	private TimeSlot timeSlot;
 	
 	LaborSlot() {
