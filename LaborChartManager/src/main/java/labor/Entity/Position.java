@@ -1,9 +1,7 @@
 package labor.Entity;
 
 import java.time.DayOfWeek;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -17,7 +15,10 @@ import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Component
 @Table
@@ -90,16 +91,21 @@ public class Position {
 	private String stringTime;
 	private String laborDays;
 	
+	@JsonProperty("daysOfWeek")
 	@ElementCollection
 	@Column(name = "daysOfWeek")
 	private Set<DayOfWeek> daysOfWeek = new HashSet<DayOfWeek>();
 	
+	@JsonProperty("laborSlots")
+	@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+	@JsonIdentityReference(alwaysAsId = true)
 	@OneToMany(mappedBy = "position",
 				fetch = FetchType.LAZY,
 				cascade = {CascadeType.ALL
 						}
 				)
 	private Set<LaborSlot> laborSlots = new HashSet<>();
+	
 	
 	public Position(String id, String name, String stringTime, String laborDays, int length, int numSlots) {
 		this.id = id;

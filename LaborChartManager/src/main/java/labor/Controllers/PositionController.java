@@ -1,6 +1,7 @@
 package labor.Controllers;
 
 import java.io.StringReader;
+import java.io.StringWriter;
 import java.time.DayOfWeek;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -17,8 +18,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonToken;
 
 import labor.Entity.LaborSlot;
 import labor.Entity.Position;
@@ -59,6 +60,12 @@ public class PositionController {
 			System.out.println("Server has received: " + jsonPosition);
 			Position position = getPositionFromJson(jsonPosition);
 			Position returnPosition = repoService.getPositionRepo().save(position);
+			
+			StringWriter writer = new StringWriter();
+			ObjectMapper objectMapper = new ObjectMapper();
+			objectMapper.writeValue(writer, returnPosition);
+			System.out.println(writer.toString());
+			
 			return new ResponseEntity<>(returnPosition, HttpStatus.ACCEPTED);
 			
 		} catch(Exception e) {
