@@ -27,15 +27,14 @@ public class LaborChartManagerApplication {
 	// Starts bot after registering class
 	@EventListener(ApplicationReadyEvent.class)
 	public void afterStartup() {
-		System.out.println("Butt");
-		populateDB();
+		//populateDB();
 	}
 	
 	public void populateDB() {
 		// Creates new DCH Position
 		repoService.getPositionRepo().save(new Position("DCH", "Dinner Chef", "16:00", "EVERYDAY", 2, 2));
 		
-		/*
+		
 		// Sets blake to DCH Position
 		List<LaborSlot> laborSlotList = repoService.getLaborSlotRepo().findByDayOfWeekAndPosition(DayOfWeek.TUESDAY, "DCH");
 		LaborSlot updateSlot = laborSlotList.get(0);
@@ -44,6 +43,6 @@ public class LaborChartManagerApplication {
 		System.out.println(repoService.getMemberRepo().findByUsername("blake"));
 		updateSlot.setCooper(newCooper);
 		repoService.getLaborSlotRepo().save(updateSlot);
-		*/
+		
 	}
 }

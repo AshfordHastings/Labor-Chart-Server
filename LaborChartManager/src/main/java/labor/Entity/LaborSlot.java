@@ -31,6 +31,7 @@ public class LaborSlot {
 			fetch = FetchType.LAZY)
 	@JoinColumn(name = "position_id")
 	@NotFound(action=NotFoundAction.IGNORE)
+	@JsonProperty("position")
 	private Position position;
 	@JsonProperty("timeSlot")
 	private TimeSlot timeSlot;

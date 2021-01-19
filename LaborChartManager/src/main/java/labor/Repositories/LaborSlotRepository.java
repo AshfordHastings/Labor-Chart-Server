@@ -15,6 +15,9 @@ import labor.Entity.Embedded.TimeSlot;
 public interface LaborSlotRepository extends CrudRepository<LaborSlot, String>{
 	List<LaborSlot> findByTimeSlot(TimeSlot timeSlot);
 	
+	@Query("from LaborSlot laborSlot where (laborSlot.position.id=:position OR laborSlot.position.name=:position)")
+	List<LaborSlot> findByPosition(@Param("position") String position);
+	
 	@Query("from LaborSlot laborSlot where laborSlot.timeSlot.dayOfWeek=:dayOfWeek and (laborSlot.position.id=:position OR laborSlot.position.name=:position)")
 	List<LaborSlot> findByDayOfWeekAndPosition(@Param("dayOfWeek") DayOfWeek dayOfWeek, @Param("position") String position);
 	

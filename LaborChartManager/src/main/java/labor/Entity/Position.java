@@ -96,7 +96,7 @@ public class Position {
 	@Column(name = "daysOfWeek")
 	private Set<DayOfWeek> daysOfWeek = new HashSet<DayOfWeek>();
 	
-	@JsonProperty("laborSlots")
+	//@JsonProperty("laborSlots")
 	@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 	@JsonIdentityReference(alwaysAsId = true)
 	@OneToMany(mappedBy = "position",
