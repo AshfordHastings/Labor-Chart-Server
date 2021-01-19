@@ -90,12 +90,10 @@ public class Position {
 	private String stringTime;
 	private String laborDays;
 	
-	@JsonProperty("daysOfWeek")
 	@ElementCollection
 	@Column(name = "daysOfWeek")
 	private Set<DayOfWeek> daysOfWeek = new HashSet<DayOfWeek>();
 	
-	@JsonProperty("laborSlots")
 	@OneToMany(mappedBy = "position",
 				fetch = FetchType.LAZY,
 				cascade = {CascadeType.ALL
