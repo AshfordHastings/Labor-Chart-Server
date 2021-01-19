@@ -1,8 +1,9 @@
 package labor.Entity;
 
 import java.time.DayOfWeek;
-import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -16,13 +17,64 @@ import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Component
 @Table
 @Entity
 public class Position {
+	public static class PositionBuilder {
+		private String id;
+		private String name;
+		private int length;
+		private int numSlots;
+		private String stringTime;
+		private String laborDays;
+		
+		public Position build() {
+			return new Position(this);
+		}
+		
+		public String id() {
+			return id;
+		}
+		public void id(String id) {
+			this.id = id;
+		}
+		public String name() {
+			return name;
+		}
+		public void name(String name) {
+			this.name = name;
+		}
+		public int length() {
+			return length;
+		}
+		public void length(int length) {
+			this.length = length;
+		}
+		public int numSlots() {
+			return numSlots;
+		}
+		public void numSlots(int numSlots) {
+			this.numSlots = numSlots;
+		}
+		public String stringTime() {
+			return stringTime;
+		}
+		public void stringTime(String stringTime) {
+			this.stringTime = stringTime;
+		}
+		public String laborDays() {
+			return laborDays;
+		}
+		public void laborDays(String laborDays) {
+			this.laborDays = laborDays;
+		}
+		
+	}
+	
+	
 	public static enum LaborDays {
 		WEEKDAYS,
 		WEEKENDS,
@@ -37,19 +89,20 @@ public class Position {
 	private int numSlots;
 	private String stringTime;
 	private String laborDays;
-	private String apple;
 	
+	@JsonProperty("daysOfWeek")
 	@ElementCollection
 	@Column(name = "daysOfWeek")
 	private Set<DayOfWeek> daysOfWeek = new HashSet<DayOfWeek>();
 	
+	@JsonProperty("laborSlots")
 	@OneToMany(mappedBy = "position",
 				fetch = FetchType.LAZY,
 				cascade = {CascadeType.ALL
 						}
 				)
 	private Set<LaborSlot> laborSlots = new HashSet<>();
-
+	
 	public Position(String id, String name, String stringTime, String laborDays, int length, int numSlots) {
 		this.id = id;
 		this.name = name;
@@ -59,12 +112,10 @@ public class Position {
 		this.laborDays = laborDays;
 		setDaysOfWeek(laborDays.toUpperCase());
 		mapTimeSlots();
-
 	}
 	
-	// creates a new Position Entity that properly populates the DaysOfWeek and creates laborSlots in the constructor
-	static public Position createPositionFrom(Position position) {
-		return new Position(position.getId(), position.getName(), position.getStringTime(), position.getLaborDays(), position.getLength(), position.getNumSlots());
+	public Position(PositionBuilder builder) {
+		this(builder.id(), builder.name(), builder.stringTime(), builder.laborDays(), builder.length(), builder.numSlots());
 	}
 
 	Position() {
