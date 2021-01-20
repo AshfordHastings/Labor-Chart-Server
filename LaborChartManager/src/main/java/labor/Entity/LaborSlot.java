@@ -13,6 +13,7 @@ import org.hibernate.annotations.NotFound;
 import org.hibernate.annotations.NotFoundAction;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.google.gson.Gson;
 
 import labor.Entity.Embedded.TimeSlot;
 
@@ -89,6 +90,11 @@ public class LaborSlot {
 		return timeSlot.getDayOfWeek();
 	}
 	
-	
+	public String getJson() {
+		Gson gson = new Gson();
+		String json = gson.toJson(this);
+		System.out.println(json);
+		return json;
+	}
 
 }
