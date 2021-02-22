@@ -6,8 +6,10 @@ from authorized labor officers and to continiously notify laborers when their sh
 
 Client can be found here: <https://github.com/AshfordHastings/Labor-Chart-Bot>
 
+### Note: The project is in progress and has been stepped away from briefly. The next steps involve building front-end  of the application, as opposed to fixing the bugs in the Discord communication tool. Updates will be posted soon! This is a highly anticipated project by our housing cooperative, and we are working on creating a solid timeline for the deployment of this application.
+
 ## To-Do:
-- [ ] Finish developing all API's necessary for the client program to function
+- [X] Finish developing all API's necessary for the client program to function
 - [ ] Implement way to designate flex labor
 - [ ] Move from local H2 database to mySQL database
 
